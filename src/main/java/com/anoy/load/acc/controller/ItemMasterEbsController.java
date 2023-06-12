@@ -28,8 +28,14 @@ public class ItemMasterEbsController {
 	
 	@GetMapping(path = "/{itemNumber}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Optional<EbsItemMasterEntity>> getEbsItemMasterDetails(@PathVariable("itemNumber") String itemNumber){
-		Optional<EbsItemMasterEntity> ebsItemMaster = itemMasterService.getEbsDetails(itemNumber);
+		try {
+			Optional<EbsItemMasterEntity> ebsItemMaster = itemMasterService.getEbsDetails(itemNumber);
+			log.info("Data fetched successfully");
 			return new ResponseEntity<Optional<EbsItemMasterEntity>>(ebsItemMaster,HttpStatus.OK);
+		}catch(Exception e) {
+			log.error("Failed to load data");
+			return new ResponseEntity<Optional<EbsItemMasterEntity>>(Optional.empty(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
 	}
 

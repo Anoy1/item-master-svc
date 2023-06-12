@@ -2,7 +2,7 @@ server:
    port: 8089
 spring:
    application:
-      name: source-item-master-pub
+      name: item-master-svc
    datasource:
       url: jdbc:mysql://localhost:3306/itemmaster
       username:
